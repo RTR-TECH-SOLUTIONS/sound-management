@@ -1,0 +1,97 @@
+---
+import Logo from "./Logo.astro";
+import { site, nav, telLink, waLink } from "../data/site";
+---
+
+<!-- Promond: header transparent peste video, logo stânga, meniu la mijloc, contact dreapta.
+     AVL: telefonul roșu și butonul crem. Devine negru după primul scroll. -->
+<header
+  id="header"
+  class="zona-inchisa fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color] duration-300 data-[solid=true]:border-white/5 data-[solid=true]:bg-bg/95 data-[solid=true]:backdrop-blur-md"
+>
+  <div class="cont flex h-[76px] items-center justify-between gap-6">
+    <Logo />
+
+    <nav aria-label="Meniu principal" class="hidden items-center gap-6 xl:flex 2xl:gap-8">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.1em] text-cream/80 transition-colors hover:text-cream">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href={telLink} class="hidden whitespace-nowrap font-serif text-[20px] font-bold text-red-text 2xl:inline-flex">
+        {site.telefonPuncte}
+      </a>
+      <a
+        href={waLink("Bună ziua! Aș dori o ofertă pentru un eveniment.")}
+        target="_blank"
+        rel="noopener"
+        class="btn-crem hidden min-h-[42px] whitespace-nowrap px-5 text-[12px] sm:inline-flex">Cere ofertă</a
+      >
+      <a
+        href={telLink}
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-red text-white sm:hidden"
+        aria-label={`Sunați la ${site.telefonAfisat}`}
+      >
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 2h2.2c.5 0 .93.34 1.05.83l.8 3.2c.1.42-.04.86-.37 1.13l-1.4 1.16a13.4 13.4 0 0 0 5.8 5.8l1.16-1.4c.27-.33.71-.47 1.13-.37l3.2.8c.49.12.83.55.83 1.05v2.2c0 1.1-.9 2-2 2C10.5 18.4 5.6 13.5 4.6 4c0-1.1.9-2 2-2Z"></path></svg>
+      </a>
+      <button
+        type="button"
+        id="meniu-buton"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 xl:hidden"
+        aria-expanded="false"
+        aria-controls="meniu-mobil"
+      >
+        <span class="sr-only">Deschide meniul</span>
+        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" fill="none">
+          <path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="meniu-mobil" hidden class="border-t border-white/10 bg-bg xl:hidden">
+    <nav aria-label="Meniu mobil" class="cont flex flex-col pb-5">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="border-b border-white/10 py-4 text-[16px] font-semibold">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href={telLink} class="mt-5 font-serif text-[26px] font-bold text-red-text">{site.telefonPuncte}</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("header");
+  const buton = document.getElementById("meniu-buton");
+  const meniu = document.getElementById("meniu-mobil");
+
+  const solid = () => {
+    const deschis = buton?.getAttribute("aria-expanded") === "true";
+    header?.setAttribute("data-solid", String(window.scrollY > 40 || deschis));
+  };
+  solid();
+  window.addEventListener("scroll", solid, { passive: true });
+
+  buton?.addEventListener("click", () => {
+    const deschis = buton.getAttribute("aria-expanded") === "true";
+    buton.setAttribute("aria-expanded", String(!deschis));
+    if (meniu) meniu.hidden = deschis;
+    solid();
+  });
+
+  meniu?.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a") && buton && meniu) {
+      buton.setAttribute("aria-expanded", "false");
+      meniu.hidden = true;
+      solid();
+    }
+  });
+</script>

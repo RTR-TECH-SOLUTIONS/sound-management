@@ -1,0 +1,55 @@
+---
+import Logo from "./Logo.astro";
+import { site, nav, telLink, waLink, u } from "../data/site";
+import { servicii } from "../data/servicii";
+
+const an = new Date().getFullYear();
+---
+
+<!-- AVL: footer ca panou rotunjit, cu coloane și caseta „Sună acum” -->
+<footer class="cont pb-6">
+  <div class="card-avl px-6 py-12 md:px-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
+      <div>
+        <Logo />
+        <p class="mt-5 max-w-[30ch] text-[15px] text-stins">Sonorizări, ecrane LED, lumini și traducere simultană pentru evenimente corporate.</p>
+        <ul class="mt-6 space-y-2.5 text-[15px] text-slab">
+          <li><a href={telLink} class="font-semibold text-red-text">{site.telefonPuncte}</a></li>
+          <li><a href={`mailto:${site.email}`} class="hover:text-cream">{site.email}</a></li>
+          <li>{site.adresa}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-[13px] font-bold uppercase tracking-[0.08em]">Servicii</h2>
+        <ul class="mt-5 space-y-2.5 text-[15px] text-stins">
+          {servicii.map((s) => <li><a href={u("/#servicii")} class="hover:text-cream">{s.titlu}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-[13px] font-bold uppercase tracking-[0.08em]">Companie</h2>
+        <ul class="mt-5 space-y-2.5 text-[15px] text-stins">
+          {nav.map((item) => <li><a href={item.href} class="hover:text-cream">{item.label}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-[13px] font-bold uppercase tracking-[0.08em]">Sună acum</h2>
+        <a href={telLink} class="mt-5 block rounded-[12px] border border-[var(--card-border)] bg-[var(--card-tare)] px-4 py-3.5 transition-colors hover:border-red">
+          <span class="block font-serif text-[22px] font-bold leading-none text-red-text">{site.telefonPuncte}</span>
+          <span class="mt-1.5 block text-[13px] text-stins">{site.program}</span>
+        </a>
+        <a href={site.facebook} target="_blank" rel="noopener" class="mt-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--card-border)] hover:border-red" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.4V14h2.7v8h3.4Z"></path></svg>
+        </a>
+        <a href={waLink("Bună ziua! Aș dori o ofertă pentru un eveniment.")} target="_blank" rel="noopener" class="btn-contur mt-4 w-full">Trimite mesaj</a>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t border-[var(--linie)] pt-6 text-[13px] text-stins md:flex-row md:items-center md:justify-between">
+      <p>© {an} Sound Management. Toate drepturile rezervate.</p>
+      <p>Timișoara · Arad</p>
+    </div>
+  </div>
+</footer>

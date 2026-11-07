@@ -1,0 +1,78 @@
+---
+import type { Clip } from "../data/media";
+
+// Video în buclă peste poster. mod="auto": pornește când e pe ecran (hero, fundaluri), cu buton de oprire.
+// mod="hover": pornește la trecerea cu mouse-ul peste cardul părinte ([data-card]); pe telefon rămâne posterul.
+// Nimic nu pornește la „mișcare redusă” sau „economisire date”.
+interface Props {
+  clip: Clip;
+  class?: string;
+  mod?: "auto" | "hover";
+  prioritar?: boolean;
+  buton?: boolean;
+  butonClass?: string;
+}
+
+const {
+  clip,
+  class: cls = "",
+  mod = "auto",
+  prioritar = false,
+  buton = mod === "auto",
+  butonClass = "bottom-4 right-4",
+} = Astro.props;
+---
+
+<div class:list={["video-bucla relative overflow-hidden", cls]} data-mod={mod}>
+  <picture>
+    {clip.vertical && <source media="(max-aspect-ratio: 1/1)" srcset={clip.vertical.poster} />}
+    <img
+      src={clip.poster}
+      alt={clip.alt}
+      width="1280"
+      height="720"
+      loading={prioritar ? "eager" : "lazy"}
+      fetchpriority={prioritar ? "high" : "auto"}
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+  </picture>
+  <video
+    class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700"
+    muted
+    loop
+    playsinline
+    preload="none"
+    aria-hidden="true"
+    tabindex="-1"
+    data-webm={clip.webm}
+    data-mp4={clip.mp4}
+    data-webm-vertical={clip.vertical?.webm}
+    data-mp4-vertical={clip.vertical?.mp4}
+  >
+  </video>
+  <slot />
+  {
+    buton && (
+      <button
+        type="button"
+        data-video-buton
+        hidden
+        class:list={[
+          "absolute z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white/85 backdrop-blur transition-colors hover:border-white hover:text-white",
+          butonClass,
+        ]}
+        aria-pressed="false"
+        aria-label="Oprește video-ul"
+      >
+        <svg width="11" height="11" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true" data-icon="pauza">
+          <rect x="1" y="1" width="3" height="8" />
+          <rect x="6" y="1" width="3" height="8" />
+        </svg>
+        <svg width="11" height="11" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true" data-icon="play" hidden>
+          <path d="M2 1l7 4-7 4z" />
+        </svg>
+      </button>
+    )
+  }
+</div>

@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import IconWhatsapp from "../components/IconWhatsapp.astro";
+import { site, u, waLink } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const baza = Astro.site ?? new URL(Astro.url.origin);
+const paginaUrl = new URL(Astro.url.pathname, baza).href;
+const ogImagine = new URL(u("/video/hero-poster.jpg"), baza).href;
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={u("/favicon.svg")} />
+    <link rel="canonical" href={paginaUrl} />
+    <meta name="theme-color" content="#111318" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:site_name" content={site.nume} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={paginaUrl} />
+    <meta property="og:image" content={ogImagine} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Kaushan+Script&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a
+      href="#continut"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-lg focus:bg-cream focus:px-4 focus:py-2 focus:text-bg"
+      >Sari la conținut</a
+    >
+    <Header />
+    <main id="continut">
+      <slot />
+    </main>
+    <Footer />
+
+    <a
+      href={waLink("Bună ziua! Aș dori o ofertă pentru un eveniment.")}
+      target="_blank"
+      rel="noopener"
+      class="fixed bottom-5 right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-[0_6px_20px_rgba(0,0,0,0.45)] transition-transform hover:scale-105"
+      aria-label="Scrieți-ne pe WhatsApp"
+    >
+      <IconWhatsapp size={30} />
+    </a>
+
+
+    <script>
+      import "../scripts/video";
+    </script>
+  </body>
+</html>

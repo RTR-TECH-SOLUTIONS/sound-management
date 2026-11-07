@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { u, telLink, site } from "../data/site";
+---
+
+<Layout title="Pagina nu a fost găsită | Sound Management" description="Pagina căutată nu există pe site-ul Sound Management.">
+  <section class="cont flex min-h-[80vh] flex-col items-center justify-center pt-24 text-center">
+    <p class="eticheta">Eroare 404</p>
+    <h1 class="mt-6 font-serif text-[clamp(44px,6vw,90px)] leading-[0.95]">Pagina nu a fost găsită.</h1>
+    <p class="mt-6 max-w-[48ch] text-slab">Pagina pe care o căutați nu există sau a fost mutată.</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a href={u("/")} class="btn-crem">Înapoi la prima pagină</a>
+      <a href={telLink} class="btn-contur">Sunați la {site.telefonPuncte}</a>
+    </div>
+  </section>
+</Layout>

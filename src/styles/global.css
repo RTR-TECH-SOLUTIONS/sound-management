@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* Combinație Promond + AVL Systems (cerută de Mario). Tema aleasă: „deschis”, alb și gri cu roșul clientului;
+   header-ul și secțiunile peste poză sau video rămân închise (.zona-inchisa). */
+@theme {
+  --color-bg: #ffffff;
+  --color-bg-2: #f3f4f6;
+  --color-bg-3: #e9ebef;
+  --color-cream: #16181d;
+  --color-red: #c8102e;
+  --color-red-text: #c8102e;
+  --color-red-dark: #a00d25;
+
+  --font-serif: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-cond: "Barlow Condensed", "DIN Condensed", "Arial Narrow", sans-serif;
+  --font-script: "Kaushan Script", cursive;
+}
+
+:root {
+  --linie: #e2e4e8;
+  --card-bg: #ffffff;
+  --card-border: #e2e4e8;
+  --card-tare: #ffffff;
+  --btn-bg: #c8102e;
+  --btn-hover: #a00d25;
+  --btn-text: #fff;
+  --grad-despre: linear-gradient(135deg, #f6f7f9 0%, #eceef2 100%);
+  --titlu-weight: 700;
+  --titlu-lh: 1.1;
+  --titlu-ls: -0.015em;
+  --titlu-size: clamp(30px, 2.2vw + 16px, 46px);
+  --stins: 68%;
+}
+
+/* zonele peste poză sau video rămân închise */
+.zona-inchisa {
+  --color-bg: #111318;
+  --color-bg-2: #171a20;
+  --color-cream: #ffffff;
+  --color-red-text: #ff5a6e;
+  --linie: rgb(255 255 255 / 0.12);
+  --card-bg: rgb(255 255 255 / 0.05);
+  --card-border: rgb(255 255 255 / 0.1);
+  --stins: 64%;
+  color: var(--color-cream);
+}
+
+.card-avl,
+[data-card] { box-shadow: 0 1px 2px rgb(16 24 40 / 0.04), 0 8px 24px -12px rgb(16 24 40 / 0.12); }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-weight: var(--titlu-weight);
+    letter-spacing: var(--titlu-ls);
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .cont {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) { .cont { padding-inline: 32px; } }
+
+  .eticheta {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-red-text);
+  }
+
+  .titlu-mare {
+    max-width: 22ch;
+    font-family: var(--font-serif);
+    font-size: var(--titlu-size);
+    line-height: var(--titlu-lh);
+    letter-spacing: var(--titlu-ls);
+    text-wrap: balance;
+  }
+
+  .titlu-tehnic {
+    font-family: var(--font-cond);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+  }
+
+  .text-slab { color: color-mix(in srgb, var(--color-cream) 74%, transparent); }
+  .text-stins { color: color-mix(in srgb, var(--color-cream) var(--stins), transparent); }
+
+  .btn-crem {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+  }
+  .btn-crem:hover { background: var(--btn-hover); }
+
+  .btn-rosu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: var(--color-red);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+  }
+  .btn-rosu:hover { background: var(--color-red-dark); }
+
+  .btn-contur {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--linie);
+    background: var(--card-bg);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: border-color 0.2s ease;
+  }
+  .btn-contur:hover { border-color: color-mix(in srgb, var(--color-cream) 45%, transparent); }
+
+  .link-sageata {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-cream) 40%, transparent);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: border-color 0.2s ease;
+  }
+  .link-sageata:hover { border-color: var(--color-red); }
+
+  .card-avl {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+  }
+
+  .liste-rosii > li {
+    position: relative;
+    padding-left: 12px;
+  }
+  .liste-rosii > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-red);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* logo-urile mărcilor: toate în același gri, ca să nu se bată culorile între ele */
+.logo-marca {
+  filter: brightness(0);
+  opacity: 0.62;
+  transition: opacity 0.2s ease;
+}
+li:hover > .logo-marca { opacity: 0.9; }

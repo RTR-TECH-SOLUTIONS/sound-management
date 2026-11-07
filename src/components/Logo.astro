@@ -1,0 +1,14 @@
+---
+import { u } from "../data/site";
+// Logo ales de Mario: scriptul de pe site-ul vechi al clientului, redesenat curat.
+// TODO(real): de exportat ca SVG/PNG pentru client (Facebook, facturi, ecrane).
+interface Props {
+  mic?: boolean;
+}
+const { mic = false } = Astro.props;
+---
+
+<a href={u("/")} class="inline-flex flex-col leading-[0.8]" aria-label="Sound Management, prima pagină">
+  <span class:list={["font-script text-cream", mic ? "text-[24px]" : "text-[28px]"]}>Sound</span>
+  <span class:list={["-mt-0.5 pl-4 font-script text-cream", mic ? "text-[20px]" : "text-[23px]"]}>Management<span class="text-red-text">.</span></span>
+</a>

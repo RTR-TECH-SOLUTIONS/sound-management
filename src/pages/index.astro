@@ -1,0 +1,369 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LoopVideo from "../components/LoopVideo.astro";
+import { site, telLink, waLink, u } from "../data/site";
+import { clipuri, poze } from "../data/media";
+import { servicii, tipuri, avantajeLed, inchirieri, cifre, marci } from "../data/servicii";
+import { evenimente, categorii, industrii } from "../data/evenimente";
+import { faq } from "../data/faq";
+
+const ofertaWa = waLink("Bună ziua! Aș dori o ofertă pentru un eveniment.");
+const galerie = [poze.mercedes, poze.porsche, poze.ibctimSala, poze.hyundai, poze.pedodonticsMese, poze.simpozion, poze.district, poze.frontproSala, poze.codecampPublic, poze.aerodium];
+
+---
+
+<Layout
+  title="Sound Management Timișoara | Sonorizări, ecrane LED, lumini și traducere simultană pentru evenimente"
+  description="Producție tehnică pentru evenimente în Timișoara și Arad: sonorizare, ecrane LED, lumini, scenotehnică, traducere simultană și filmare, cu echipamente proprii și tehnician pe toată durata."
+>
+  <!-- 1. HERO (Promond): video pe tot ecranul, cu titlurile serviciilor scrise în video -->
+  <section class="zona-inchisa relative h-[100svh] min-h-[560px] overflow-hidden bg-bg" aria-label="Prezentare video">
+    <h1 class="sr-only">Sound Management Timișoara: sonorizări, ecrane LED, lumini și traducere simultană pentru evenimente</h1>
+    <LoopVideo clip={clipuri.hero} prioritar class="absolute! inset-0" butonClass="bottom-7 right-24" />
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/70 to-transparent" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent" aria-hidden="true"></div>
+    <a href="#prezentare" class="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-cream/70 hover:text-cream md:flex">
+      Descoperă
+      <span class="h-8 w-px bg-cream/40"></span>
+    </a>
+  </section>
+
+  <!-- 2. DECLARAȚIA (AVL): titlu serif uriaș în două tonuri, text, butoane, telefon roșu -->
+  <section id="prezentare" class="cont py-20 text-center md:py-28">
+    <p class="eticheta">Audio · Video · Lumini · Traducere</p>
+    <h2 class="mx-auto mt-8 max-w-[14ch] font-serif text-[clamp(36px,4vw+12px,72px)] leading-[1.04]">
+      Sunet, imagine și lumină <span class="text-cream/55">pentru evenimente.</span>
+    </h2>
+    <p class="mx-auto mt-8 max-w-[560px] text-[clamp(16px,0.5vw+14px,19px)] leading-relaxed text-slab">
+      Sonorizare, ecrane LED, lumini, scenotehnică și traducere simultană pentru conferințe, lansări și evenimente
+      corporate, în Timișoara, Arad și împrejurimi.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
+      <a href={ofertaWa} target="_blank" rel="noopener" class="btn-crem">Solicită ofertă gratuită</a>
+      <a href="#servicii" class="link-sageata">Descoperă serviciile <span aria-hidden="true">→</span></a>
+    </div>
+    <a href={telLink} class="mt-12 inline-flex items-center gap-3 font-serif text-[clamp(30px,2vw+18px,40px)] leading-none text-red-text">
+      {site.telefonPuncte}
+    </a>
+    <p class="mt-3 text-[14px] text-stins">Vă răspundem în aceeași zi</p>
+  </section>
+
+  <!-- 3. CINE SUNTEM (Promond): cerc cu video și arce decorative, text în dreapta, fundal colorat -->
+  <section id="despre" class="relative overflow-hidden bg-[image:var(--grad-despre)] py-20 md:py-28">
+    <div class="cont grid items-center gap-14 lg:grid-cols-2">
+      <div class="relative mx-auto aspect-square w-full max-w-[460px]">
+        <svg class="absolute inset-0 h-full w-full" viewBox="0 0 460 460" fill="none" aria-hidden="true">
+          <circle cx="230" cy="230" r="222" class="stroke-red" stroke-width="6" stroke-linecap="round" stroke-dasharray="120 40 30 60 220 900" />
+          <circle cx="230" cy="230" r="206" class="stroke-cream" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="4 14" />
+        </svg>
+        <img src={poze.mixer.src} alt={poze.mixer.alt} width={poze.mixer.w} height={poze.mixer.h} loading="lazy" decoding="async" class="absolute inset-[30px] h-[calc(100%-60px)] w-[calc(100%-60px)] rounded-full object-cover" />
+      </div>
+      <div>
+        <p class="flex items-center gap-2 text-[14px] font-semibold"><span class="h-2 w-2 rounded-full bg-red"></span> Bine ați venit!</p>
+        <h2 class="titlu-mare mt-4">Cine suntem și cu ce ne ocupăm?</h2>
+        <p class="mt-6 max-w-[600px] text-slab">
+          De peste 15 ani, Sound Management asigură partea tehnică a evenimentelor din Timișoara și Arad.
+        </p>
+        <p class="mt-4 max-w-[600px] text-slab">
+          Fie că este vorba de o conferință, un congres medical sau o lansare de produs, ne ocupăm de tot: de la
+          sonorizare, ecrane LED și lumini, până la traducere simultană și filmare. Venim cu echipamentele noastre, iar
+          tehnicianul rămâne în sală pe toată durata evenimentului.
+        </p>
+        <a href="#servicii" class="btn-rosu mt-9">Mai multe despre noi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TIPURI DE EVENIMENTE (Promond): 4 coloane peste o fotografie pe toată lățimea -->
+  <section class="zona-inchisa relative isolate" aria-label="Tipuri de evenimente">
+    <img src={poze.codecamp.src} alt="" width={poze.codecamp.w} height={poze.codecamp.h} loading="lazy" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(10,10,10,0.55)_0%,rgba(10,10,10,0.75)_55%,rgba(10,10,10,0.95)_100%)]" aria-hidden="true"></div>
+    <div class="grid min-h-[560px] md:grid-cols-2 lg:min-h-[640px] lg:grid-cols-4">
+      {
+        tipuri.map((t, i) => (
+          <div class:list={["flex flex-col justify-end border-white/10 px-6 pb-10 pt-24 md:px-8", i > 0 && "lg:border-l", i % 2 === 1 && "md:border-l"]}>
+            <h3 class="titlu-tehnic text-[clamp(24px,1.2vw+16px,30px)]">{t.titlu}</h3>
+            <p class="mt-3 max-w-[34ch] text-[16px] leading-relaxed text-cream/85">{t.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 5. SERVICII (AVL): grilă de carduri cu poză, titlu serif, text, puncte roșii, „Detalii →” -->
+  <section id="servicii" class="cont py-20 md:py-28">
+    <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+      <div>
+        <p class="eticheta">Serviciile noastre</p>
+        <h2 class="titlu-mare mt-4">Toată tehnica evenimentului, de la un singur furnizor</h2>
+      </div>
+      <p class="max-w-[320px] text-[15px] text-stins lg:text-right">
+        De la sonorizare la foto și video, pentru evenimente în Timișoara și Arad.
+      </p>
+    </div>
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        servicii.map((s) => (
+          <article data-card class="card-avl group flex flex-col overflow-hidden transition-colors hover:border-[color-mix(in_srgb,var(--color-cream)_25%,transparent)]">
+            <LoopVideo clip={s.clip} mod="hover" class="aspect-[16/9]" />
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="font-serif text-[21px] leading-tight">{s.titlu}</h3>
+              <p class="mt-3 text-[15.5px] leading-relaxed text-slab">{s.text}</p>
+              <ul class="liste-rosii mt-4 space-y-1.5 text-[14px] text-stins">
+                {s.puncte.map((p) => <li>{p}</li>)}
+              </ul>
+              <a href={waLink(`Bună ziua! Aș dori o ofertă pentru: ${s.titlu}.`)} target="_blank" rel="noopener" class="mt-auto inline-flex items-center gap-1.5 pt-5 text-[14px] font-semibold text-red-text hover:text-red-dark">
+                Detalii <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 6. ECRANE LED (Promond): fundal video, titlu tehnic, buton, rând de avantaje cu iconițe -->
+  <section id="ecrane-led" class="zona-inchisa relative isolate overflow-hidden">
+    <LoopVideo clip={clipuri.ledFundal} class="absolute! inset-0 -z-10" butonClass="right-6 top-6" />
+    <div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(10,10,10,0.92)_0%,rgba(10,10,10,0.6)_55%,rgba(10,10,10,0.35)_100%)]" aria-hidden="true"></div>
+    <div class="cont pointer-events-none py-24 md:py-32">
+      <div class="pointer-events-auto flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-[760px]">
+          <h2 class="titlu-tehnic text-[clamp(40px,4vw+12px,72px)]">Ecrane LED profesionale pentru evenimente</h2>
+          <p class="mt-6 max-w-[620px] text-cream/85">
+            Transformăm orice sală într-o scenă: ecrane LED modulare de interior și exterior, pentru conferințe,
+            lansări de produs, gale și evenimente corporate. Montaj, configurare și operare incluse.
+          </p>
+        </div>
+        <a href={waLink("Bună ziua! Aș dori o ofertă pentru ecrane LED.")} target="_blank" rel="noopener" class="btn-rosu shrink-0 self-start lg:self-auto">Vezi detalii <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="pointer-events-auto mt-16 grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-5">
+        {avantajeLed.map((a) => <li class="border-t-2 border-red pt-4 text-[15px] font-semibold leading-snug">{a}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. CIFRE + ECHIPAMENTE PROPRII (AVL) -->
+  <section class="cont py-20 md:py-28">
+    <dl class="grid grid-cols-2 gap-y-10 lg:grid-cols-4">
+      {
+        cifre.map((c) => (
+          <div>
+            <dt class="font-serif text-[clamp(44px,3vw+20px,64px)] leading-none">{c.val}</dt>
+            <dd class="mt-2 text-[15px] text-stins">{c.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <div class="mt-20 grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="eticheta">Echipamente proprii</p>
+        <h2 class="titlu-mare mt-4">Echipamente profesionale, verificate înainte de fiecare eveniment</h2>
+        <p class="mt-6 max-w-[540px] text-slab">
+          Toate echipamentele sunt ale noastre: de la microfoane wireless și mixere digitale, la ecrane LED, lumini de
+          scenă și sisteme de traducere simultană. Venim mereu și cu echipamente de rezervă.
+        </p>
+        <a href="#inchirieri" class="btn-contur mt-8">Vezi închirierile</a>
+      </div>
+      <div>
+        <p class="text-[15px] font-semibold">Mărci din dotare</p>
+        <ul class="mt-4 grid grid-cols-2 border-l border-t border-[var(--linie)] sm:grid-cols-3">
+          {
+            marci.map((m) => (
+              <li class="flex flex-col items-center justify-center gap-3 border-b border-r border-[var(--linie)] px-4 py-7 text-center">
+                <img src={u(m.logo)} alt={m.nume} width={m.w} height={m.h} loading="lazy" decoding="async" class="logo-marca h-auto max-w-full" style={`width:${Math.round(Math.sqrt(2900 * (m.w / m.h)))}px`} />
+                <span class="text-[13px] text-stins">{m.rol}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PORTOFOLIU (AVL): filtre ca pastile + grilă de evenimente -->
+  <section id="portofoliu" class="cont pb-20 md:pb-28">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="eticheta">Portofoliu</p>
+        <h2 class="titlu-mare mt-4">Evenimente la care am asigurat tehnica</h2>
+      </div>
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrează evenimentele">
+        {
+          categorii.map((c, i) => (
+            <button
+              type="button"
+              data-filtru={c.id}
+              aria-pressed={i === 0 ? "true" : "false"}
+              class="rounded-full border border-[var(--linie)] px-4 py-2 text-[14px] font-semibold text-cream/75 transition-colors hover:border-red aria-pressed:border-red aria-pressed:bg-red aria-pressed:text-white"
+            >
+              {c.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+    <ul class="mt-10 grid auto-rows-[260px] gap-4 sm:grid-cols-2 lg:grid-cols-3" data-portofoliu>
+      {
+        evenimente.map((e) => (
+          <li data-categorie={e.categorie} class:list={["zona-inchisa group relative overflow-hidden rounded-[20px]", e.forma === "inalt" && "lg:row-span-2"]}>
+            <img src={e.poza.src} alt={e.poza.alt} width={e.poza.w} height={e.poza.h} loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" aria-hidden="true"></div>
+            <div class="absolute inset-x-0 bottom-0 p-5">
+              <p class="text-[13px] font-semibold text-red-text">{e.eticheta}</p>
+              <h3 class="mt-1.5 font-serif text-[20px] leading-tight">{e.titlu}</h3>
+              <p class="mt-1 text-[14px] text-stins">{e.loc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-10 text-center">
+      <a href={site.facebook} target="_blank" rel="noopener" class="link-sageata">Mai multe evenimente pe Facebook <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- 9. ÎNCHIRIERI (Promond): titlu centrat + 4 carduri translucide cu poză, iconiță, titlu tehnic -->
+  <section id="inchirieri" class="bg-bg-2 py-20 md:py-28">
+    <div class="cont">
+      <div class="mx-auto max-w-[760px] text-center">
+        <p class="eticheta">Și separat, la închiriere</p>
+        <h2 class="titlu-mare mt-4">Închirieri echipamente audio-video</h2>
+        <p class="mt-6 text-slab">
+          Pe lângă serviciile complete, închiriem și separat echipamente pentru evenimente. Fiecare echipament este
+          verificat și configurat înainte de predare, ca să funcționeze din prima.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          inchirieri.map((x) => (
+            <article class="rounded-[20px] border border-[var(--card-border)] bg-[var(--card-tare)] p-2.5">
+              <img src={x.poza.src} alt={x.poza.alt} width={x.poza.w} height={x.poza.h} loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-[14px] object-cover" />
+              <div class="px-3 pb-5 pt-5">
+                <h3 class="titlu-tehnic text-[26px]">{x.titlu}</h3>
+                <p class="mt-2 text-[15.5px] leading-relaxed text-slab">{x.text}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CLIENȚI ȘI INDUSTRII: titlu în stânga, listă pe rânduri în dreapta (domeniu + clienții reali) -->
+  <section class="cont py-20 md:py-28" aria-labelledby="clienti-titlu">
+    <div class="grid gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="eticheta">Clienți și industrii</p>
+        <h2 id="clienti-titlu" class="titlu-mare mt-4">De la congrese medicale la lansări auto</h2>
+        <p class="mt-5 max-w-[460px] text-slab">
+          Lucrăm cu firme, hoteluri, agenții de evenimente și organizatori de congrese din Timișoara și Arad.
+        </p>
+        <a href="#portofoliu" class="link-sageata mt-8">Vezi portofoliul <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="border-t border-[var(--linie)]">
+        {
+          industrii.map((x, i) => (
+            <li class="grid gap-1 border-b border-[var(--linie)] py-5 sm:grid-cols-[3rem_14rem_1fr] sm:items-baseline sm:gap-4">
+              <span class="hidden text-[13px] font-semibold text-red-text sm:block">{String(i + 1).padStart(2, "0")}</span>
+              <span class="text-[17px] font-semibold">{x.nume}</span>
+              <span class="text-[16px] text-slab">{x.detaliu}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11. GALERIE (Promond): carusel de poze cu săgeți -->
+  <section class="bg-bg-2 py-14" aria-label="Galerie foto">
+    <div class="cont relative">
+      <div id="galerie" class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none]">
+        {
+          galerie.map((p) => (
+            <img src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" class="aspect-[4/3] w-[85%] shrink-0 snap-start rounded-[14px] object-cover sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)]" />
+          ))
+        }
+      </div>
+      <button type="button" data-galerie="-1" class="absolute left-1 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-black/60 text-white backdrop-blur hover:bg-red md:left-3" aria-label="Pozele anterioare">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M9 2 4 7l5 5" stroke="currentColor" stroke-width="2" /></svg>
+      </button>
+      <button type="button" data-galerie="1" class="absolute right-1 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-black/60 text-white backdrop-blur hover:bg-red md:right-3" aria-label="Pozele următoare">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="m5 2 5 5-5 5" stroke="currentColor" stroke-width="2" /></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 12. ÎNTREBĂRI FRECVENTE (AVL): titlu stânga, acordeon dreapta -->
+  <section id="intrebari" class="cont py-20 md:py-28">
+    <div class="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
+      <div>
+        <p class="eticheta">Întrebări frecvente</p>
+        <h2 class="titlu-mare mt-4">Ce ne întreabă organizatorii</h2>
+        <p class="mt-5 text-slab">
+          Nu găsiți răspunsul? Scrieți-ne la <a href={`mailto:${site.email}`} class="text-cream underline underline-offset-4">{site.email}</a>{" "}
+          sau sunați la <a href={telLink} class="text-red-text">{site.telefonPuncte}</a>.
+        </p>
+      </div>
+      <div class="space-y-3">
+        {
+          faq.map((item, i) => (
+            <details class="card-avl group rounded-[14px]" open={i === 0}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[16px] font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
+                <span>{item.q}</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="shrink-0 text-stins transition-transform duration-200 group-open:rotate-180" aria-hidden="true"><path d="m2 4 4 4 4-4" stroke="currentColor" stroke-width="1.6" /></svg>
+              </summary>
+              <p class="px-5 pb-5 text-[15.5px] leading-relaxed text-slab">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. CONTACT (AVL): titlu centrat, telefon mare roșu, buton, bife -->
+  <section id="contact" class="cont pb-20 pt-6 text-center md:pb-28">
+    <p class="eticheta">Sonorizări · Timișoara · Arad</p>
+    <h2 class="mx-auto mt-5 max-w-[16ch] font-serif text-[clamp(32px,3vw+14px,56px)] leading-[1.06]">Aveți un eveniment în perioada următoare?</h2>
+    <p class="mx-auto mt-6 max-w-[520px] text-slab">
+      Consultanță gratuită și ofertă personalizată pentru conferințe, congrese, lansări și evenimente corporate.
+    </p>
+    <a href={telLink} class="mt-10 inline-flex items-center gap-3 font-serif text-[clamp(36px,3vw+20px,54px)] leading-none text-red-text">
+      {site.telefonPuncte}
+    </a>
+    <p class="mt-3 text-[14px] text-stins">Vă sunăm înapoi cât mai repede</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+      <a href={ofertaWa} target="_blank" rel="noopener" class="btn-crem">Cere ofertă gratuită</a>
+      <a href={`mailto:${site.email}`} class="text-[15px] font-medium text-cream/75 underline-offset-4 hover:text-cream hover:underline">{site.email}</a>
+    </div>
+    <ul class="liste-rosii mt-10 flex flex-wrap justify-center gap-x-8 gap-y-2 text-[14px] text-stins">
+      <li>Răspuns în aceeași zi</li>
+      <li>Ofertă gratuită</li>
+      <li>Echipamente proprii</li>
+      <li>Tehnician pe toată durata</li>
+    </ul>
+  </section>
+</Layout>
+
+<script>
+  // filtrele din portofoliu
+  const butoane = [...document.querySelectorAll<HTMLButtonElement>("[data-filtru]")];
+  const carduri = [...document.querySelectorAll<HTMLLIElement>("[data-portofoliu] > li")];
+  butoane.forEach((b) =>
+    b.addEventListener("click", () => {
+      const f = b.dataset.filtru;
+      butoane.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      carduri.forEach((c) => (c.hidden = !(f === "toate" || c.dataset.categorie === f)));
+    }),
+  );
+
+  // săgețile caruselului
+  const galerie = document.getElementById("galerie");
+  document.querySelectorAll<HTMLButtonElement>("[data-galerie]").forEach((b) =>
+    b.addEventListener("click", () => {
+      if (!galerie) return;
+      const pas = galerie.clientWidth * 0.9 * Number(b.dataset.galerie);
+      galerie.scrollBy({ left: pas, behavior: "smooth" });
+    }),
+  );
+</script>
